@@ -28,4 +28,4 @@ var createFieldValidation = function(KEY) {
         LIMITATION: LIMITATION[KEY],
     })
 };
-export { createButton, createFieldMain };
+export { createButtonValidation, createFieldValidation };
