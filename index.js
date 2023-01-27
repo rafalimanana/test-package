@@ -11,7 +11,7 @@ var FIELD = getField();
 var BUTTON = getButton();
 
 var createButtonValidation = function(params={}) {
-	var {text="", required_fields = []}
+	var {text="", required_fields = []} = params;
 	if (!text) {
 		text=BUTTON.INSCRIPTION_VALIDATION
 	}
