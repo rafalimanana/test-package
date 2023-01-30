@@ -48,11 +48,14 @@ class Field {
         }
         field.addRestrictions(RESTRICTION[KEY]);
         field.addLimitations(LIMITATION[KEY]);
+
+        return field;
 	}
 
 	static get(KEY){
 		var FIELD = getField(this.lang);
 		var STRUCTURE = FIELD[KEY];
+		console.log("get", this)
 		if (this.name == STRUCTURE.NAME) {
 			return this;
 		}
