@@ -19,7 +19,7 @@ class Field {
 	linked;
 	lang;
 
-	static addField(KEY, params={}){
+	static add(KEY, params={}){
 		var {
 			placeholder="",
 			required=false,
@@ -52,11 +52,9 @@ class Field {
         }
         field.addRestrictions(RESTRICTION);
         field.addLimitations(LIMITATION);
-        
-        return field
 	}
 
-	static getField(KEY){
+	static get(KEY){
 		var FIELD = getField(this.lang);
 		var STRUCTURE = FIELD[KEY];
 		if (this.name == STRUCTURE.NAME) {
