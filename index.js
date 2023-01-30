@@ -39,17 +39,8 @@ class Field {
         field.name = STRUCTURE.NAME;
         field.type = type;
         field.placeholder = placeholder;
-        if(!placeholder && STRUCTURE.PLACEHOLDER){
-        	field.placeholder = STRUCTURE.PLACEHOLDER[domain]
-        }
         field.required = required;
-        if(required == undefined && STRUCTURE.REQUIRED !== undefined){
-        	field.required = STRUCTURE.REQUIRED;
-        }
         field.label = label;
-        if(label == undefined && STRUCTURE.LABEL){
-        	field.label = STRUCTURE.LABEL[domain]
-        }
         field.value = value;
         field.lang = lang;
 
