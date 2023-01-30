@@ -1,5 +1,9 @@
 import { waitInput, handleInput } from "core/utilities/input/input.js";
 import { getIndex, getData, subscribe } from "tools/indexation/indexation.js";
+import { getField } from "common/functions/getField.js";
+import VALIDATION from "common/structure/VALIDATION/VALIDATION.js";
+import RESTRICTION from "common/structure/RESTRICTION/RESTRICTION.js";
+import LIMITATION from "common/structure/LIMITATION/LIMITATION.js";
 
 class Field{
 	name;
@@ -13,6 +17,51 @@ class Field{
 	value;
 	instance;
 	linked;
+	lang;
+
+	static add(KEY, params={}){
+		var {
+			placeholder="",
+			required=false,
+			type="text",
+			label="",
+			domain="DEFAULT",
+			value="",
+			lang="fr",
+		} = params;
+        var field = new Field();
+        if (!KEY) {
+        	return field;
+        }
+		var FIELD = getField(lang);
+		var STRUCTURE = FIELD[KEY];
+        field.name = STRUCTURE.NAME;
+        field.type = type;
+        field.placeholder = placeholder;
+        field.required = required;
+        field.label = label;
+        field.value = value;
+        field.lang = lang;
+
+        var VALIDATION = VALIDATION[KEY].INSCRIPTION;
+        var RESTRICTION = RESTRICTION[KEY];
+        var LIMITATION = LIMITATION[KEY];
+
+        if (field.required) {
+        	field.addValidations(VALIDATION);
+        }
+        field.addRestrictions(RESTRICTION);
+        field.addLimitations(LIMITATION);
+	}
+
+	static get(KEY){
+		var FIELD = getField(this.lang);
+		var STRUCTURE = FIELD[KEY];
+		if (this.name == STRUCTURE.NAME) {
+			return this;
+		}
+		return {}
+	}
 
 	static create(params = {}){
 		var {STRUCTURE, domain = "DEFAULT", VALIDATION, RESTRICTION, LIMITATION} = params
