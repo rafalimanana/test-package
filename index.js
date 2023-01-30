@@ -39,8 +39,17 @@ class Field {
         field.name = STRUCTURE.NAME;
         field.type = type;
         field.placeholder = placeholder;
+        if(!placeholder && STRUCTURE.PLACEHOLDER){
+        	field.placeholder = STRUCTURE.PLACEHOLDER[domain]
+        }
         field.required = required;
+        if(required == undefined && STRUCTURE.REQUIRED !== undefined){
+        	field.required = STRUCTURE.REQUIRED;
+        }
         field.label = label;
+        if(label == undefined && STRUCTURE.LABEL){
+        	field.label = STRUCTURE.LABEL[domain]
+        }
         field.value = value;
         field.lang = lang;
 
@@ -51,8 +60,6 @@ class Field {
         field.addLimitations(LIMITATION[KEY]);
 
         Field.getFields[field.name] = field;
-
-        return field;
 	}
 
 	static create(params = {}){
@@ -92,7 +99,6 @@ class Field {
 	static get(KEY, lang){
 		var FIELD = getField(lang);
 		var STRUCTURE = FIELD[KEY];
-		console.log("getstatic", [STRUCTURE, Field.getFields])
 		if (
 			Field.getFields && 
 			STRUCTURE.NAME && 
