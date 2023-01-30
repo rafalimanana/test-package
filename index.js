@@ -55,7 +55,7 @@ class Field {
 	static get(KEY){
 		var FIELD = getField(this.lang);
 		var STRUCTURE = FIELD[KEY];
-		console.log("get", this)
+		console.log("get", this.name)
 		if (this.name == STRUCTURE.NAME) {
 			return this;
 		}
