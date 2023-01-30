@@ -55,23 +55,6 @@ class Field {
         return field;
 	}
 
-	get(KEY, lang){
-		var FIELD = getField(lang);
-		var STRUCTURE = FIELD[KEY];
-		console.log("getKEY", [this, this.name])
-		if (
-			this.getFields && 
-			STRUCTURE.NAME && 
-			this.getFields[STRUCTURE.NAME] !== undefined
-		) {
-			return this.getFields[STRUCTURE.NAME];
-		}
-		return {}
-	}
-	addGetFields(field){
-		this.getFields[field.name] = field
-	}
-
 	static create(params = {}){
 		var {STRUCTURE, domain = "DEFAULT", VALIDATION, RESTRICTION, LIMITATION} = params
         var field = new Field();
@@ -104,6 +87,23 @@ class Field {
         field.addLimitations(LIMITATION);
 
         return field
+	}
+
+	get(KEY, lang){
+		var FIELD = getField(lang);
+		var STRUCTURE = FIELD[KEY];
+		if (
+			this.getFields && 
+			STRUCTURE.NAME && 
+			this.getFields[STRUCTURE.NAME] !== undefined
+		) {
+			return this.getFields[STRUCTURE.NAME];
+		}
+		return {}
+	}
+	
+	addGetFields(field){
+		this.getFields[field.name] = field
 	}
 
 	getElement(){
