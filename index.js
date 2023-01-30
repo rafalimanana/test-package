@@ -18,7 +18,7 @@ class Field {
 	instance;
 	linked;
 	lang;
-	getFields=[];
+	static getFields=[];
 
 	static add(KEY, params={}){
 		var {
@@ -50,7 +50,7 @@ class Field {
         field.addRestrictions(RESTRICTION[KEY]);
         field.addLimitations(LIMITATION[KEY]);
 
-        field.addGetFields(field);
+        Field.getFields[field.name] = field;
 
         return field;
 	}
@@ -89,21 +89,18 @@ class Field {
         return field
 	}
 
-	get(KEY, lang){
+	static get(KEY, lang){
 		var FIELD = getField(lang);
 		var STRUCTURE = FIELD[KEY];
+		console.log("getstatic", [STRUCTURE, Field.getFields])
 		if (
-			this.getFields && 
+			Field.getFields && 
 			STRUCTURE.NAME && 
-			this.getFields[STRUCTURE.NAME] !== undefined
+			Field.getFields[STRUCTURE.NAME] !== undefined
 		) {
-			return this.getFields[STRUCTURE.NAME];
+			return Field.getFields[STRUCTURE.NAME];
 		}
 		return {}
-	}
-	
-	addGetFields(field){
-		this.getFields[field.name] = field
 	}
 
 	getElement(){
