@@ -1,183 +1,22 @@
 import { waitInput, handleInput } from "core/utilities/input/input.js";
 import { getIndex, getData, subscribe } from "tools/indexation/indexation.js";
-import { getField } from "common/functions/getField.js";
-import VALIDATION from "common/structure/VALIDATION/VALIDATION.js";
-import RESTRICTION from "common/structure/RESTRICTION/RESTRICTION.js";
-import LIMITATION from "common/structure/LIMITATION/LIMITATION.js";
 
-class Field {
-	name;
-	type;
-	placeholder;
-	validations = [];
-	restrictions = [];
-	limitations = [];
-	errorMessage;
-	isValid;
-	value;
-	instance;
-	linked;
-	lang;
-	static $fields=[];
+class FieldPW {
+	PARAMS = {};
 
 	static add(KEY, params={}){
-		var {
-			placeholder="",
-			required=false,
-			type="text",
-			label="",
-			domain="DEFAULT",
-			value="",
-			lang="fr",
-		} = params;
-        var field = new Field();
-        if (!KEY) {
-        	return field;
-        }
-		var FIELD = getField(lang);
-		var STRUCTURE = FIELD[KEY];
-        field.name = STRUCTURE.NAME;
-        field.type = type;
-        field.placeholder = placeholder;
-        field.required = required;
-        field.label = label;
-        field.value = value;
-        field.lang = lang;
-
-        if (field.required) {
-        	field.addValidations(VALIDATION[KEY].INSCRIPTION);
-        }
-        field.addRestrictions(RESTRICTION[KEY]);
-        field.addLimitations(LIMITATION[KEY]);
-
-        Field.$fields[field.name] = field;
+        FieldPW.PARAMS[KEY] = params;
 	}
 
-	static create(params = {}){
-		var {STRUCTURE, domain = "DEFAULT", VALIDATION, RESTRICTION, LIMITATION} = params
-        var field = new Field();
-        if(
-        	!STRUCTURE ||
-        	!VALIDATION ||
-        	!LIMITATION ||
-        	!RESTRICTION
-        ){
-        	return field;
-        }
-        field.name = STRUCTURE.NAME;
-        field.type = STRUCTURE.TYPE;
-        field.placeholder = "";
-        if(STRUCTURE.PLACEHOLDER){
-        	field.placeholder = STRUCTURE.PLACEHOLDER[domain]
-        }
-        field.label = "";
-        if(STRUCTURE.LABEL){
-        	field.label = STRUCTURE.LABEL[domain]
-        }
-        field.required = false;
-        if(STRUCTURE.REQUIRED !== undefined){
-        	field.required = STRUCTURE.REQUIRED;
-        }
-        field.value = "";
-
-        field.addValidations(VALIDATION);
-        field.addRestrictions(RESTRICTION);
-        field.addLimitations(LIMITATION);
-
-        return field
-	}
-
-	static get(params){
-		if (typeof params === 'object') {
-			var {key, lang="fr"} = params
-		}
-		else {
-			var key = params;
-			var lang = "fr";
-		}
-		var FIELD = getField(lang);
-		var STRUCTURE = FIELD[key];
+	static get(){
 		if (
-			Field.$fields && 
-			STRUCTURE.NAME && 
-			Field.$fields[STRUCTURE.NAME] !== undefined
+			FieldPW.PARAMS && 
+			Object.keys(FieldPW.PARAMS).length !== 0
 		) {
-			return Field.$fields[STRUCTURE.NAME];
+			return FieldPW.PARAMS;
 		}
 		return {}
 	}
-
-	getElement(){
-		var element = $(`[name="${this.name}"]`)
-		return element;
-	}
-
-	checkLimitations(event){
-		if (event) {
-			this.limitations.map((limitation) =>{
-				limitation.verification(event)
-			})
-		}
-	}
-
-	checkValidation(event){
-		this.checkLimitations(event);
-		var element = this.getElement();
-		var value = $(element).val()
-		this.value = value
-		this.isValid = true
-		this.errorMessage = "";
-		this.instance.refresh();
-		if(event && this.linked && this.linked.value){
-			this.linked.checkValidation(false)
-		}
-		waitInput(this.name, () =>{
-			this.isValid = true
-			this.validations.map((validation) =>{
-				if(this.isValid){
-					if(validation.check){
-						if(!validation.check(this.linked)(value)){
-							this.isValid = false
-							this.errorMessage = validation.message
-						}
-					}
-					if(validation.verification){
-						if(!validation.verification(value)){
-							this.isValid = false
-							this.errorMessage = validation.message
-						}
-					}
-				}
-			});
-			this.value = value
-			this.instance.refresh()
-		}, 500)
-	}
-
-	checkRestriction(event){
-		this.restrictions.map((restriction) =>{
-			restriction.verification(event)
-		});
-		this.instance.refresh()
-	}
-
-	addValidations(validations){
-		validations.map((validation) =>{
-			this.validations.push(validation)
-		})
-	}
-
-	addRestrictions(restrictions){
-		restrictions.map((restriction) =>{
-			this.restrictions.push(restriction)
-		})
-	}
-
-	addLimitations(limitations){
-		limitations.map((limitation) =>{
-			this.limitations.push(limitation)
-		})
-	}
 }
 
-export default Field
+export default FieldPW
