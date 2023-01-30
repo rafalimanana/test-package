@@ -1,10 +1,7 @@
 import { waitInput, handleInput } from "core/utilities/input/input.js";
 import { getIndex, getData, subscribe } from "tools/indexation/indexation.js";
-import VALIDATION from "common/structure/VALIDATION/VALIDATION.js";
-import RESTRICTION from "common/structure/RESTRICTION/RESTRICTION.js";
-import LIMITATION from "common/structure/LIMITATION/LIMITATION.js";
 
-class FieldPW {
+class Field{
 	name;
 	type;
 	placeholder;
@@ -16,46 +13,7 @@ class FieldPW {
 	value;
 	instance;
 	linked;
-	static PARAMS = {};
-	static LANGS = {};
 
-	static add(KEY, params={}){
-        FieldPW.PARAMS[KEY] = params;
-	}
-
-	static get(){
-		if (
-			FieldPW.PARAMS && 
-			Object.keys(FieldPW.PARAMS).length !== 0
-		) {
-			return FieldPW.PARAMS;
-		}
-		return {}
-	}
-
-	static addLang(KEY, field={}){
-        FieldPW.LANGS[KEY] = field;
-	}
-
-	static getLang(KEY){
-		if (
-			FieldPW.LANGS && 
-			Object.keys(FieldPW.LANGS).length !== 0 && 
-			FieldPW.LANGS[KEY] !== undefined
-		) {
-			return FieldPW.LANGS[KEY];
-		}
-		return {}
-	}
-	static getValidation(){
-		return VALIDATION;
-	}
-	static getRestriction(){
-		return RESTRICTION;
-	}
-	static getLimitation(){
-		return LIMITATION;
-	}
 	static create(params = {}){
 		var {STRUCTURE, domain = "DEFAULT", VALIDATION, RESTRICTION, LIMITATION} = params
         var field = new Field();
@@ -163,4 +121,4 @@ class FieldPW {
 	}
 }
 
-export default FieldPW
+export default Field
