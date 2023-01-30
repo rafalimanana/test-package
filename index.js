@@ -2,7 +2,7 @@ import { waitInput, handleInput } from "core/utilities/input/input.js";
 import { getIndex, getData, subscribe } from "tools/indexation/indexation.js";
 
 class FieldPW {
-	PARAMS = {};
+	static PARAMS = {};
 
 	static add(KEY, params={}){
         FieldPW.PARAMS[KEY] = params;
