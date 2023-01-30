@@ -1,6 +1,6 @@
 {
   "name": "pw-validation",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "PW Validation",
   "main": "index.js",
   "scripts": {
