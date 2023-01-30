@@ -18,7 +18,7 @@ class Field {
 	instance;
 	linked;
 	lang;
-	static getFields=[];
+	static $fields=[];
 
 	static add(KEY, params={}){
 		var {
@@ -50,7 +50,7 @@ class Field {
         field.addRestrictions(RESTRICTION[KEY]);
         field.addLimitations(LIMITATION[KEY]);
 
-        Field.getFields[field.name] = field;
+        Field.$fields[field.name] = field;
 	}
 
 	static create(params = {}){
@@ -87,15 +87,22 @@ class Field {
         return field
 	}
 
-	static get(KEY, lang){
+	static get(params){
+		if (typeof params === 'object') {
+			var {key, lang="fr"} = params
+		}
+		else {
+			var key = params;
+			var lang = "fr";
+		}
 		var FIELD = getField(lang);
-		var STRUCTURE = FIELD[KEY];
+		var STRUCTURE = FIELD[key];
 		if (
-			Field.getFields && 
+			Field.$fields && 
 			STRUCTURE.NAME && 
-			Field.getFields[STRUCTURE.NAME] !== undefined
+			Field.$fields[STRUCTURE.NAME] !== undefined
 		) {
-			return Field.getFields[STRUCTURE.NAME];
+			return Field.$fields[STRUCTURE.NAME];
 		}
 		return {}
 	}
