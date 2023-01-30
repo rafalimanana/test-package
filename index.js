@@ -39,6 +39,7 @@ class FieldPW {
 
 	static getLang(KEY){
 		if (
+			KEY && 
 			FieldPW.LANGS && 
 			Object.keys(FieldPW.LANGS).length !== 0 && 
 			FieldPW.LANGS[KEY] !== undefined
