@@ -43,15 +43,11 @@ class Field {
         field.value = value;
         field.lang = lang;
 
-        var VALIDATION = VALIDATION[KEY].INSCRIPTION;
-        var RESTRICTION = RESTRICTION[KEY];
-        var LIMITATION = LIMITATION[KEY];
-
         if (field.required) {
-        	field.addValidations(VALIDATION);
+        	field.addValidations(VALIDATION[KEY].INSCRIPTION);
         }
-        field.addRestrictions(RESTRICTION);
-        field.addLimitations(LIMITATION);
+        field.addRestrictions(RESTRICTION[KEY]);
+        field.addLimitations(LIMITATION[KEY]);
 	}
 
 	static get(KEY){
