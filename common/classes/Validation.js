@@ -1,8 +1,8 @@
-import {getField} from "common/functions/getField.js";
-var FIELD = getField()
+import Field from "index.js";
 
 class Validation{
 	static build(params = {}){
+		var FIELD = Field.get();
 		var {action = "verification", domain = "DEFAULT"} = params;
 		return (key, name, message, params) =>{
 			if(action == "check"){

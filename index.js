@@ -4,7 +4,7 @@ import VALIDATION from "common/structure/VALIDATION/VALIDATION.js";
 import RESTRICTION from "common/structure/RESTRICTION/RESTRICTION.js";
 import LIMITATION from "common/structure/LIMITATION/LIMITATION.js";
 
-class FieldPW {
+class Field {
 	name;
 	type;
 	placeholder;
@@ -20,31 +20,31 @@ class FieldPW {
 	static LANGS = {};
 
 	static add(KEY, params={}){
-        FieldPW.PARAMS[KEY] = params;
+        Field.PARAMS[KEY] = params;
 	}
 
 	static get(){
 		if (
-			FieldPW.PARAMS && 
-			Object.keys(FieldPW.PARAMS).length !== 0
+			Field.PARAMS && 
+			Object.keys(Field.PARAMS).length !== 0
 		) {
-			return FieldPW.PARAMS;
+			return Field.PARAMS;
 		}
 		return {}
 	}
 
 	static addLang(KEY, field={}){
-        FieldPW.LANGS[KEY] = field;
+        Field.LANGS[KEY] = field;
 	}
 
 	static getLang(KEY){
 		if (
 			KEY && 
-			FieldPW.LANGS && 
-			Object.keys(FieldPW.LANGS).length !== 0 && 
-			FieldPW.LANGS[KEY] !== undefined
+			Field.LANGS && 
+			Object.keys(Field.LANGS).length !== 0 && 
+			Field.LANGS[KEY] !== undefined
 		) {
-			return FieldPW.LANGS[KEY];
+			return Field.LANGS[KEY];
 		}
 		return {}
 	}
@@ -164,4 +164,4 @@ class FieldPW {
 	}
 }
 
-export default FieldPW
+export default Field
