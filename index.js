@@ -2,6 +2,7 @@ import { waitInput, handleInput } from "core/utilities/input/input.js";
 import VALIDATION from "common/structure/VALIDATION/VALIDATION.js";
 import RESTRICTION from "common/structure/RESTRICTION/RESTRICTION.js";
 import LIMITATION from "common/structure/LIMITATION/LIMITATION.js";
+import Validation from "common/classes/Validation.js";
 
 class Field {
 	name;
@@ -47,18 +48,10 @@ class Field {
 		}
 		return {}
 	}
-	static getValidation(){
-		return VALIDATION;
-	}
-	static getRestriction(){
-		return RESTRICTION;
-	}
-	static getLimitation(){
-		return LIMITATION;
-	}
 	static create(params = {}){
 		var {STRUCTURE, domain = "DEFAULT", VALIDATION, RESTRICTION, LIMITATION} = params
         var field = new Field();
+        Validation.Field = Field;
         if(
         	!STRUCTURE ||
         	!VALIDATION ||
@@ -163,4 +156,9 @@ class Field {
 	}
 }
 
-export default Field
+export {
+	Field,
+	VALIDATION,
+	RESTRICTION,
+	LIMITATION
+}

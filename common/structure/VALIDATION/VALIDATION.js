@@ -1,6 +1,7 @@
 import Validation from "common/classes/Validation.js";
 
 class VALIDATION{
+
 	static LASTNAME = {
 		INSCRIPTION:[
 			Validation.build()("LASTNAME", "notEmpty", "EMPTY_MESSAGE"),
