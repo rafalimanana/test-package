@@ -50,8 +50,8 @@ class Field {
 	}
 	static create(params = {}){
 		var {STRUCTURE, domain = "DEFAULT", VALIDATION, RESTRICTION, LIMITATION} = params
-        var field = new Field();
         Validation.Field = Field;
+        var field = new Field();
         if(
         	!STRUCTURE ||
         	!VALIDATION ||
@@ -156,7 +156,7 @@ class Field {
 	}
 }
 
-export {
+module.exports = {
 	Field,
 	VALIDATION,
 	RESTRICTION,
