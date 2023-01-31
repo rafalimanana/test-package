@@ -1,5 +1,4 @@
 import { waitInput, handleInput } from "core/utilities/input/input.js";
-import { getIndex, getData, subscribe } from "tools/indexation/indexation.js";
 import VALIDATION from "common/structure/VALIDATION/VALIDATION.js";
 import RESTRICTION from "common/structure/RESTRICTION/RESTRICTION.js";
 import LIMITATION from "common/structure/LIMITATION/LIMITATION.js";
