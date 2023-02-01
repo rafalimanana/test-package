@@ -1,4 +1,4 @@
-import { Random } from "core/random/Random.js";
+import { Random } from "../../../core/random/Random.js";
 
 var timings = [];
 var timingIndexes = [];

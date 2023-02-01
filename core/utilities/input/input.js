@@ -1,4 +1,4 @@
-import { getIndex, getData, subscribe } from "core/tools/indexation/indexation.js";
+import { getIndex, getData, subscribe } from "../../../core/tools/indexation/indexation.js";
 
 function waitInput(input, f = () => {}, t = 1000) {
     var data = getData(input);

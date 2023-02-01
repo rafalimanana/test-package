@@ -1,4 +1,4 @@
-import Restriction from "common/classes/Restriction.js";
+import Restriction from "../../../common/classes/Restriction.js";
 
 class RESTRICTION {
 	static LASTNAME = [

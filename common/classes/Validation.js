@@ -1,9 +1,9 @@
+import {Field} from "../../index.js";
+
 class Validation{
-	static Field;
 	static build(params = {}){
 		var {action = "verification", domain = "DEFAULT"} = params;
 		return (key, name, message, params) =>{
-			var Field = Validation.Field;
 			var FIELD = Field.get();
 			if(action == "check"){
 				return {
